@@ -32,7 +32,7 @@ import Animated, {
   useAnimatedReaction,
 } from 'react-native-reanimated';
 import equals from 'react-fast-compare';
-import Button, { ActionType } from './Button';
+import Button from './Button';
 
 type ButtonComponentProps = React.ElementType &
   (typeof TouchableOpacity | typeof View);

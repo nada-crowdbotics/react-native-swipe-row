@@ -3,24 +3,14 @@
  * Copyright (c) 2021 nghinv@lumi.biz
  */
 
-import React, {Component, ReactElement} from 'react';
-import { Text, StyleSheet, TouchableOpacity, TextStyle } from 'react-native';
+import React, {ReactElement} from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
-import { Icon, IconPropsType } from '@nghinv/react-native-icons';
 import equals from 'react-fast-compare';
-
-export type ActionType = {
-  icon?: IconPropsType;
-  title?: string;
-  titleColor?: string;
-  titleStyle?: TextStyle;
-  onPress?: () => void;
-  backgroundColor?: string;
-};
 
 interface ButtonProps {
   content: ReactElement;
