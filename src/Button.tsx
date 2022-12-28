@@ -3,7 +3,7 @@
  * Copyright (c) 2021 nghinv@lumi.biz
  */
 
-import React from 'react';
+import React, {Component, ReactElement} from 'react';
 import { Text, StyleSheet, TouchableOpacity, TextStyle } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -20,12 +20,10 @@ export type ActionType = {
   titleStyle?: TextStyle;
   onPress?: () => void;
   backgroundColor?: string;
-  testID?: string;
-  accessibilityLabel?: string;
 };
 
 interface ButtonProps {
-  content: ActionType;
+  content: ReactElement;
   width: number;
   index: number;
   translateX: Animated.SharedValue<number>;
@@ -48,8 +46,8 @@ function Button(props: ButtonProps) {
     onPress,
     length,
   } = props;
-  const backgroundColor = content.backgroundColor || '#b388ff';
-  const titleColor = content.titleColor || 'white';
+  // const backgroundColor = content.backgroundColor || '#b388ff';
+  // const titleColor = content.titleColor || 'white';
 
   const contentStyle = useAnimatedStyle(() => {
     const delta = Math.abs(translateX.value) - maxTranslate;
@@ -97,26 +95,12 @@ function Button(props: ButtonProps) {
   });
 
   return (
-    <Animated.View style={[{ backgroundColor }, contentStyle]}>
+    <Animated.View style={[contentStyle]}>
       <TouchableOpacity
         onPress={onPress}
-        testID={content.testID}
-        accessibilityLabel={content.accessibilityLabel}
         style={[styles.container, { width }]}
       >
-        {content.icon && <Icon color="white" size={24} {...content.icon} />}
-        {!!content.title && (
-          <Text
-            style={[
-              styles.title,
-              // eslint-disable-next-line react-native/no-inline-styles
-              { color: titleColor, marginTop: content.icon ? 2 : 0 },
-              content.titleStyle,
-            ]}
-          >
-            {content.title}
-          </Text>
-        )}
+        {content}
       </TouchableOpacity>
     </Animated.View>
   );

@@ -7,7 +7,7 @@ import React, {
   forwardRef,
   useRef,
   useCallback,
-  useImperativeHandle,
+  useImperativeHandle, ReactElement,
 } from 'react';
 import {
   View,
@@ -51,8 +51,8 @@ export const State = {
 };
 
 interface SwipeRowProps {
-  left?: Array<ActionType>;
-  right?: Array<ActionType>;
+  left?: Array<{content: ReactElement, onPress: () => void}>;
+  right?: Array<{content: ReactElement, onPress: () => void}>;
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   buttonWidth?: number;
@@ -277,7 +277,7 @@ function SwipeRow(props: SwipeRowProps, ref: React.Ref<any>) {
             {left?.reverse().map((content, index) => (
               <Button
                 key={index}
-                content={content}
+                content={content.content}
                 width={buttonWidth}
                 index={left.length - index}
                 translateX={translateX}
@@ -294,7 +294,7 @@ function SwipeRow(props: SwipeRowProps, ref: React.Ref<any>) {
             {right?.map((content, index) => (
               <Button
                 key={index}
-                content={content}
+                content={content.content}
                 width={buttonWidth}
                 index={right.length - index}
                 translateX={translateX}
